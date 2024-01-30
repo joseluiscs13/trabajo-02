@@ -25,7 +25,7 @@ function preload() {
 
 function create() {
   const cards = this.physics.add.group();
-  const cardData = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4'];
+  const cardData = ['card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7', 'card8', 'card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7', 'card8'];
 
   const cardPositions = [
     { x: 100, y: 100 },
@@ -42,8 +42,15 @@ function create() {
   Phaser.Utils.Array.Shuffle(cardPositions);
 
   cardPositions.forEach((pos, index) => {
+    console.log('Creating card at:', pos.x, pos.y);
     const card = cards.create(pos.x, pos.y, cardData[index]).setInteractive();
     card.on('pointerdown', () => cardClicked(card));
+  });
+
+  // Agregamos un listener de clic a la ventana para iniciar el contexto de audio
+  window.addEventListener('click', () => {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    audioContext.resume();
   });
 }
 
@@ -63,5 +70,6 @@ function cardClicked(card) {
     firstCard = null;
   }
 }
+
 
   
