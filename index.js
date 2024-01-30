@@ -3,6 +3,7 @@ class MemoryGame extends Phaser.Scene {
     super({ key: 'MemoryGame' });
     this.cards = [];
     this.flippedCards = [];
+    this.cardScale = 1.2; // Ajusta este valor para cambiar el nivel de zoom
   }
 
   preload() {
@@ -62,7 +63,7 @@ class MemoryGame extends Phaser.Scene {
 
   flipCard(card) {
     if (!card.flipped && this.flippedCards.length < 2) {
-      card.sprite.setScale(1.1); // Ajusta este valor según tu preferencia
+      card.sprite.setScale(this.cardScale);
       card.flipped = true;
       this.flippedCards.push(card);
 
@@ -117,5 +118,6 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+
 
 
