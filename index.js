@@ -1,6 +1,6 @@
 const config = {
     type: Phaser.CANVAS,
-    canvas: document.createElement('canvas'), 
+    canvas: document.createElement('canvas'),
     context: document.createElement('canvas').getContext('2d', { willReadFrequently: true }),
     width: 800,
     height: 600,
@@ -10,6 +10,18 @@ const config = {
         gravity: { y: 300 },
         debug: false,
       },
+    },
+    render: {
+      antialias: false,
+      pixelArt: true,
+      roundPixels: true,
+      transparent: false,
+      clearBeforeRender: true,
+      premultipliedAlpha: true,
+      failIfMajorPerformanceCaveat: false,
+      powerPreference: 'default',
+      desynchronized: true,
+      backgroundColor: 0xffffff,
     },
     scene: {
       preload: preload,
