@@ -3,6 +3,7 @@ class MemoryGame extends Phaser.Scene {
     super({ key: 'MemoryGame' });
     this.cards = [];
     this.flippedCards = [];
+    this.isCheckingMatch = false;
   }
 
   preload() {
@@ -60,7 +61,7 @@ class MemoryGame extends Phaser.Scene {
   }
 
   flipCard(card) {
-    if (!card.flipped && this.flippedCards.length < 2) {
+    if (!card.flipped && this.flippedCards.length < 2 && !this.isCheckingMatch) {
       card.sprite.setScale(1.2);
       card.flipped = true;
       this.flippedCards.push(card);
@@ -78,8 +79,10 @@ class MemoryGame extends Phaser.Scene {
       this.removeMatchedCards();
       console.log('Match!');
     } else {
+      this.isCheckingMatch = true;
       this.time.delayedCall(1000, () => {
         this.resetFlippedCards();
+        this.isCheckingMatch = false;
       });
     }
   }
