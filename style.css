@@ -1,14 +1,21 @@
 body {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-  }
-  
-  canvas {
-    border: 2px solid #333;
-    border-radius: 8px;
-  }
-  
+  margin: 0;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  background-color: #f0f0f0; 
+}
+
+.image-card {
+  width: 100px; 
+  height: 100px;
+  transition: transform 0.2s ease-in-out; 
+}
+
+
+.image-card.flipped {
+  transform: scale(1.2);
+}
