@@ -18,54 +18,55 @@ class MemoryGame extends Phaser.Scene {
     }
   
     create() {
-      // Configuración del juego
+     
       this.generateCards();
   
-      // Mezclar cartas
+     
       this.cards = Phaser.Math.RND.shuffle(this.cards);
   
-      // Mostrar cartas en el juego
+      
       this.renderCards();
     }
   
     generateCards() {
-      // Generar cartas con nombres duplicados
+      
       const cardData = [
         'card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7', 'card8',
       ];
   
-      // Duplicar cartas para tener pares
+    
       this.cards = cardData.concat(cardData);
   
-      // Crear sprites de cartas
+      
       this.cards = this.cards.map(cardName => ({
         name: cardName,
         sprite: this.add.image(0, 0, cardName).setInteractive(),
         flipped: false,
       }));
   
-      // Asignar manejadores de eventos de clic a las cartas
+      
       this.cards.forEach(card => {
         card.sprite.on('pointerup', () => this.flipCard(card));
       });
     }
   
     renderCards() {
-      // Posicionar cartas en una cuadrícula (4x4)
-      const columns = 4;
-      const cardWidth = 100;
-      const cardHeight = 100;
-  
-      this.cards.forEach((card, index) => {
-        const row = Math.floor(index / columns);
-        const col = index % columns;
-  
-        const x = col * cardWidth + cardWidth / 2;
-        const y = row * cardHeight + cardHeight / 2;
-  
-        card.sprite.setPosition(x, y);
-      });
-    }
+  const columns = 4;
+  const rows = this.cards.length / columns;
+  const cardWidth = this.sys.canvas.width / columns;
+  const cardHeight = this.sys.canvas.height / rows;
+
+  this.cards.forEach((card, index) => {
+    const row = Math.floor(index / columns);
+    const col = index % columns;
+
+    const x = col * cardWidth + cardWidth / 2;
+    const y = row * cardHeight + cardHeight / 2;
+
+    card.sprite.setPosition(x, y);
+    card.sprite.setDisplaySize(cardWidth, cardHeight); 
+  });
+}
   
     flipCard(card) {
       // Verificar si la carta ya está volteada o en proceso de volteo
