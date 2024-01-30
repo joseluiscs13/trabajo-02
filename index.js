@@ -86,10 +86,16 @@ class MemoryGame extends Phaser.Scene {
 
   removeMatchedCards() {
     this.flippedCards.forEach(card => {
-      card.sprite.visible = false;
+      card.sprite.destroy();
     });
 
+    this.cards = this.cards.filter(card => !this.flippedCards.includes(card));
     this.flippedCards = [];
+
+    if (this.cards.length === 0) {
+      console.log('¡Has ganado!');
+      // Aquí puedes agregar más acciones para cuando el juego se complete
+    }
   }
 
   resetFlippedCards() {
@@ -110,4 +116,3 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-
