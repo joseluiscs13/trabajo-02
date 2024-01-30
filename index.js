@@ -35,6 +35,7 @@ class MemoryGame extends Phaser.Scene {
       name: cardName,
       sprite: this.add.image(0, 0, cardName).setInteractive(),
       flipped: false,
+      originalScale: 1, // Nuevo campo para almacenar la escala original
     }));
 
     this.input.on('gameobjectup', (pointer, cardSprite) => {
@@ -58,6 +59,7 @@ class MemoryGame extends Phaser.Scene {
 
       card.sprite.setPosition(x, y);
       card.sprite.setDisplaySize(cardWidth, cardHeight);
+      card.originalScale = card.sprite.scale; // Almacenar la escala original
     });
   }
 
@@ -103,7 +105,7 @@ class MemoryGame extends Phaser.Scene {
   resetFlippedCards() {
     this.flippedCards.forEach(card => {
       card.flipped = false;
-      card.sprite.setScale(1);
+      card.sprite.setScale(card.originalScale); // Restaurar la escala original
     });
 
     this.flippedCards = [];
@@ -118,6 +120,4 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-
-
 
