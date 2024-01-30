@@ -7,14 +7,14 @@ class MemoryGame extends Phaser.Scene {
   
     preload() {
       // Cargar imágenes aquí
-      this.load.image('card1', 'Cards/1.png');
-      this.load.image('card2', 'Cards/2.webp');
-      this.load.image('card3', 'Cards/3.png');
-      this.load.image('card4', 'Cards/4.png');
-      this.load.image('card5', 'Cards/5.jpg');
-      this.load.image('card6', 'Cards/6.jpeg');
-      this.load.image('card7', 'Cards/7.webp');
-      this.load.image('card8', 'Cards/8.png');
+      this.load.image('card1', '1.png');
+      this.load.image('card2', '2.webp');
+      this.load.image('card3', '3.png');
+      this.load.image('card4', '4.png');
+      this.load.image('card5', '5.jpg');
+      this.load.image('card6', '6.jpeg');
+      this.load.image('card7', '7.webp');
+      this.load.image('card8', '8.png');
     }
   
     create() {
@@ -116,4 +116,3 @@ class MemoryGame extends Phaser.Scene {
   
   // Crear el juego
   const game = new Phaser.Game(config);
-  
