@@ -62,7 +62,7 @@ class MemoryGame extends Phaser.Scene {
 
   flipCard(card) {
     if (!card.flipped && this.flippedCards.length < 2) {
-      card.sprite.setScale(1.2);
+      card.sprite.setScale(1.1); // Ajusta este valor según tu preferencia
       card.flipped = true;
       this.flippedCards.push(card);
 
@@ -117,4 +117,5 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+
 
