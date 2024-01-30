@@ -3,7 +3,6 @@ class MemoryGame extends Phaser.Scene {
     super({ key: 'MemoryGame' });
     this.cards = [];
     this.flippedCards = [];
-    this.isCheckingMatch = false;
   }
 
   preload() {
@@ -37,8 +36,9 @@ class MemoryGame extends Phaser.Scene {
       flipped: false,
     }));
 
-    this.cards.forEach(card => {
-      card.sprite.on('pointerup', () => this.flipCard(card));
+    this.input.on('gameobjectup', (pointer, cardSprite) => {
+      const card = this.cards.find(c => c.sprite === cardSprite);
+      this.flipCard(card);
     });
   }
 
@@ -61,7 +61,7 @@ class MemoryGame extends Phaser.Scene {
   }
 
   flipCard(card) {
-    if (!card.flipped && this.flippedCards.length < 2 && !this.isCheckingMatch) {
+    if (!card.flipped && this.flippedCards.length < 2) {
       card.sprite.setScale(1.2);
       card.flipped = true;
       this.flippedCards.push(card);
@@ -79,10 +79,8 @@ class MemoryGame extends Phaser.Scene {
       this.removeMatchedCards();
       console.log('Match!');
     } else {
-      this.isCheckingMatch = true;
       this.time.delayedCall(1000, () => {
         this.resetFlippedCards();
-        this.isCheckingMatch = false;
       });
     }
   }
@@ -119,3 +117,4 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+
