@@ -1,5 +1,5 @@
 const config = {
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS, 
   width: 800,
   height: 600,
   scene: {
@@ -45,12 +45,6 @@ function create() {
     console.log('Creating card at:', pos.x, pos.y);
     const card = cards.create(pos.x, pos.y, cardData[index]).setInteractive();
     card.on('pointerdown', () => cardClicked(card));
-  });
-
-  // Agregamos un listener de clic a la ventana para iniciar el contexto de audio
-  window.addEventListener('click', () => {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    audioContext.resume();
   });
 }
 
